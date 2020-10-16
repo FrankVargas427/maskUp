@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.dpro.widgets.OnWeekdaysChangeListener;
 import com.dpro.widgets.WeekdaysPicker;
 import com.henktech.maskup.R;
+import com.henktech.maskup.managers.DayHourManager;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -62,6 +63,9 @@ public class HomeActivity extends AppCompatActivity {
         widget.setOnWeekdaysChangeListener(new OnWeekdaysChangeListener() {
             @Override
             public void onChange(View view, int clickedDayOfWeek, List<Integer> selectedDays) {
+                if (selectedDays.contains(clickedDayOfWeek)) {
+                    calListStart.put(clickedDayOfWeek, DayHourManager.getDayHour(com.henktech.maskup.activities.HomeActivity.this, clickedDayOfWeek));
+                }
 
                 if (widget.noDaySelected()) {
                     saveDaysBtn.setClickable(false);
@@ -98,7 +102,6 @@ public class HomeActivity extends AppCompatActivity {
         } finally {
             if (fos != null) {
                 try {
-                    assert oos != null;
                     oos.close();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -114,9 +117,9 @@ public class HomeActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent mainIntent = new Intent(HomeActivity.this, FlatActivity.class);
-                HomeActivity.this.startActivity(mainIntent);
-                HomeActivity.this.finish();
+                Intent mainIntent = new Intent(com.henktech.maskup.activities.HomeActivity.this, com.henktech.maskup.activities.FlatActivity.class);
+                com.henktech.maskup.activities.HomeActivity.this.startActivity(mainIntent);
+                com.henktech.maskup.activities.HomeActivity.this.finish();
             }
         }, 100);
     }
