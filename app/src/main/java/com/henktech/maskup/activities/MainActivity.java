@@ -21,9 +21,9 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable(){
             @Override
             public void run() {
-                Intent mainIntent = new Intent(com.henktech.maskup.activities.MainActivity.this, HomeActivity.class);
-                com.henktech.maskup.activities.MainActivity.this.startActivity(mainIntent);
-                com.henktech.maskup.activities.MainActivity.this.finish();
+                Intent mainIntent = new Intent(MainActivity.this, HomeActivity.class);
+                MainActivity.this.startActivity(mainIntent);
+                MainActivity.this.finish();
             }
         }, SPLASH_DISPLAY_LENGTH);
 

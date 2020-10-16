@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activities.MainActivity"
-            android:label="Main" >
+            android:label="Mask Up">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -20,6 +20,10 @@
         <activity
             android:name=".activities.HomeActivity"
             android:label="Home" />
-    </application>
+        <activity
+            android:name=".activities.FlatActivity"
+            android:label="Flat" />
 
+        <receiver android:name=".publishers.NotificationPublisher" />
+    </application>
 </manifest>

@@ -29,15 +29,16 @@ public class FlatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flat);
+        getSupportActionBar().hide();
     }
 
     public void goToHome(View v) {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent mainIntent = new Intent(com.henktech.maskup.activities.FlatActivity.this, HomeActivity.class);
-                com.henktech.maskup.activities.FlatActivity.this.startActivity(mainIntent);
-                com.henktech.maskup.activities.FlatActivity.this.finish();
+                Intent mainIntent = new Intent(FlatActivity.this, HomeActivity.class);
+                FlatActivity.this.startActivity(mainIntent);
+                FlatActivity.this.finish();
             }
         }, 100);
     }
@@ -60,7 +61,6 @@ public class FlatActivity extends AppCompatActivity {
         } finally {
             if (fis != null) {
                 try {
-                    assert ois != null;
                     ois.close();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -82,7 +82,6 @@ public class FlatActivity extends AppCompatActivity {
         for (Object intKey : employeeByKey) {
             Calendar entry = (Calendar) daysMap.get(intKey);
 
-            assert entry != null;
             @SuppressLint("DefaultLocale")
             String lineSet = DayHourManager.dayNumToString(
                     entry.get(Calendar.DAY_OF_WEEK)) +
@@ -93,8 +92,9 @@ public class FlatActivity extends AppCompatActivity {
 
             days.append(lineSet).append("\n");
         }
+        ;
 
-        AlertDialog alertDialog = new AlertDialog.Builder(com.henktech.maskup.activities.FlatActivity.this).create();
+        AlertDialog alertDialog = new AlertDialog.Builder(FlatActivity.this).create();
         alertDialog.setTitle("Alert");
         alertDialog.setMessage(days.toString());
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",

@@ -52,6 +52,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        getSupportActionBar().hide();
 
         final WeekdaysPicker widget = (WeekdaysPicker) findViewById(R.id.weekdays);
         final Button saveDaysBtn = (Button) findViewById(R.id.saveButton);
@@ -64,7 +65,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onChange(View view, int clickedDayOfWeek, List<Integer> selectedDays) {
                 if (selectedDays.contains(clickedDayOfWeek)) {
-                    calListStart.put(clickedDayOfWeek, DayHourManager.getDayHour(com.henktech.maskup.activities.HomeActivity.this, clickedDayOfWeek));
+                    calListStart.put(clickedDayOfWeek, DayHourManager.getDayHour(HomeActivity.this, clickedDayOfWeek));
                 }
 
                 if (widget.noDaySelected()) {
@@ -117,9 +118,9 @@ public class HomeActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent mainIntent = new Intent(com.henktech.maskup.activities.HomeActivity.this, com.henktech.maskup.activities.FlatActivity.class);
-                com.henktech.maskup.activities.HomeActivity.this.startActivity(mainIntent);
-                com.henktech.maskup.activities.HomeActivity.this.finish();
+                Intent mainIntent = new Intent(HomeActivity.this, FlatActivity.class);
+                HomeActivity.this.startActivity(mainIntent);
+                HomeActivity.this.finish();
             }
         }, 100);
     }
