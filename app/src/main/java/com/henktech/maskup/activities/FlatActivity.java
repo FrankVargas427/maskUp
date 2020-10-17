@@ -92,10 +92,9 @@ public class FlatActivity extends AppCompatActivity {
 
             days.append(lineSet).append("\n");
         }
-        ;
 
         AlertDialog alertDialog = new AlertDialog.Builder(FlatActivity.this).create();
-        alertDialog.setTitle("Alert");
+        alertDialog.setTitle("Alarmas");
         alertDialog.setMessage(days.toString());
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {

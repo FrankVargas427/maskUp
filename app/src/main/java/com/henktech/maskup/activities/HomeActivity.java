@@ -13,6 +13,7 @@ import com.dpro.widgets.OnWeekdaysChangeListener;
 import com.dpro.widgets.WeekdaysPicker;
 import com.henktech.maskup.R;
 import com.henktech.maskup.managers.DayHourManager;
+import com.henktech.maskup.managers.NotificationManager;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -54,8 +55,8 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         getSupportActionBar().hide();
 
-        final WeekdaysPicker widget = (WeekdaysPicker) findViewById(R.id.weekdays);
-        final Button saveDaysBtn = (Button) findViewById(R.id.saveButton);
+        final WeekdaysPicker widget = findViewById(R.id.weekdays);
+        final Button saveDaysBtn = findViewById(R.id.saveButton);
 
         widget.setCustomDays(map);
         saveDaysBtn.setClickable(false);
@@ -80,7 +81,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void saveDays(View v) {
-        final WeekdaysPicker widget = (WeekdaysPicker) findViewById(R.id.weekdays);
+        final WeekdaysPicker widget = findViewById(R.id.weekdays);
         List<Integer> selectedDaysInt = widget.getSelectedDays();
         HashMap<Integer, Calendar> saveDays = new HashMap<>();
 
@@ -114,6 +115,8 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
         }
+
+        NotificationManager.scheduleNotification(this, saveDays);
 
         new Handler().postDelayed(new Runnable() {
             @Override
