@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/maskup_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".activities.MainActivity"
             android:label="Mask Up">
@@ -30,7 +31,13 @@
             android:name=".activities.FindMaskActivity"
             android:label="Find Mask" />
 
-        <receiver android:name=".publishers.NotificationPublisher" />
+        <receiver android:name=".publishers.NotificationPublisher">
+            <intent-filter>
+                <action android:name="android.media.action.DISPLAY_NOTIFICATION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

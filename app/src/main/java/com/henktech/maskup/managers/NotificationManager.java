@@ -14,15 +14,18 @@ import java.util.Map;
 public class NotificationManager {
 
     public static void scheduleNotification(Context context, HashMap<Integer, Calendar> saveDays) {
-        Intent notifIntent = new Intent(context, NotificationPublisher.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 100,
-                notifIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-
         for (Map.Entry<Integer, Calendar> entry : saveDays.entrySet()) {
+            Intent notificationIntent = new Intent(context, NotificationPublisher.class);
+            notificationIntent.putExtra("MaskUp!", "Remember your mask!");
+
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, entry.getKey(),
+                    notificationIntent, PendingIntent.FLAG_ONE_SHOT);
+            AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
             Calendar iterDay = entry.getValue();
 
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, iterDay.getTimeInMillis() - (1000 * 60 * 10),
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
+                    iterDay.getTimeInMillis() - (1000 * 60 * 10),
                     AlarmManager.INTERVAL_DAY * 7, pendingIntent);
         }
     }
