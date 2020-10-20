@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,11 +13,8 @@ import com.dpro.widgets.WeekdaysPicker;
 import com.henktech.maskup.R;
 import com.henktech.maskup.managers.DayHourManager;
 import com.henktech.maskup.managers.NotificationManager;
+import com.henktech.maskup.managers.SaveLoadManager;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -89,6 +85,9 @@ public class HomeActivity extends AppCompatActivity {
             saveDays.put(selectedDaysInt.get(i), calListStart.get(selectedDaysInt.get(i)));
         }
 
+        SaveLoadManager.saveFile(saveDays, this.getApplicationContext());
+
+        /*
         FileOutputStream fos = null;
         ObjectOutputStream oos = null;
         try {
@@ -115,6 +114,7 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
         }
+        */
 
         NotificationManager.scheduleNotification(this, saveDays);
 

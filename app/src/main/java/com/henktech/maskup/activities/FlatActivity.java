@@ -12,11 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.henktech.maskup.R;
 import com.henktech.maskup.managers.DayHourManager;
+import com.henktech.maskup.managers.SaveLoadManager;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -44,6 +41,7 @@ public class FlatActivity extends AppCompatActivity {
     }
 
     public void reviewHours(View v) {
+        /*
         HashMap daysMap = null;
         FileInputStream fis = null;
         ObjectInputStream ois = null;
@@ -72,6 +70,10 @@ public class FlatActivity extends AppCompatActivity {
                 }
             }
         }
+        */
+
+        HashMap<Integer, Calendar> daysMap = (HashMap<Integer, Calendar>)
+                SaveLoadManager.loadFile(this.getApplicationContext());
 
         StringBuilder days = new StringBuilder();
 
