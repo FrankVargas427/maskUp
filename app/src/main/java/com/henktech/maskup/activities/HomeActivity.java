@@ -87,35 +87,6 @@ public class HomeActivity extends AppCompatActivity {
 
         SaveLoadManager.saveFile(saveDays, this.getApplicationContext());
 
-        /*
-        FileOutputStream fos = null;
-        ObjectOutputStream oos = null;
-        try {
-            fos = openFileOutput(FILENAME, MODE_PRIVATE);
-            oos = new ObjectOutputStream(fos);
-            oos.writeObject(saveDays);
-
-            Toast.makeText(this, "Saved days!", Toast.LENGTH_LONG).show();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (fos != null) {
-                try {
-                    oos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        */
-
         NotificationManager.scheduleNotification(this, saveDays);
 
         new Handler().postDelayed(new Runnable() {

@@ -41,36 +41,6 @@ public class FlatActivity extends AppCompatActivity {
     }
 
     public void reviewHours(View v) {
-        /*
-        HashMap daysMap = null;
-        FileInputStream fis = null;
-        ObjectInputStream ois = null;
-
-        try {
-            fis = openFileInput(FILENAME);
-            ois = new ObjectInputStream(fis);
-            daysMap = (HashMap) ois.readObject();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            if (fis != null) {
-                try {
-                    ois.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    fis.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        */
 
         HashMap<Integer, Calendar> daysMap = (HashMap<Integer, Calendar>)
                 SaveLoadManager.loadFile(this.getApplicationContext());
@@ -105,6 +75,5 @@ public class FlatActivity extends AppCompatActivity {
                     }
                 });
         alertDialog.show();
-
     }
 }
