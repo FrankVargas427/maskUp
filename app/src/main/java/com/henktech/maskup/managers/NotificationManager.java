@@ -17,7 +17,7 @@ public class NotificationManager {
 
     public static void scheduleNotification(Context context, HashMap<Integer, Calendar> saveDays) {
         AlarmManager[] alarmManagers = new AlarmManager[saveDays.size()];
-        Intent intents[] = new Intent[saveDays.size()];
+        Intent[] intents = new Intent[saveDays.size()];
 
         for (Map.Entry<Integer, Calendar> entry : saveDays.entrySet()) {
             int i = 0;
