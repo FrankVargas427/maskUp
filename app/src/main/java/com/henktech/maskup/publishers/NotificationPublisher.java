@@ -8,8 +8,6 @@ import android.content.Intent;
 
 import androidx.core.app.NotificationCompat;
 
-import com.henktech.maskup.activities.FindMaskActivity;
-
 public class NotificationPublisher extends BroadcastReceiver {
 
     public static String NOTIFICATION_ID = "notification-id";
@@ -20,7 +18,8 @@ public class NotificationPublisher extends BroadcastReceiver {
         NotificationManager notificationManager = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        Intent repeatingIntent = new Intent(context, FindMaskActivity.class);
+        Intent repeatingIntent = new Intent(context, NotificationPublisher.class);
+        repeatingIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         repeatingIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 100, repeatingIntent,
@@ -34,6 +33,5 @@ public class NotificationPublisher extends BroadcastReceiver {
                 .setAutoCancel(true);
 
         notificationManager.notify(100, builder.build());
-
     }
 }
