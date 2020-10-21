@@ -1,5 +1,6 @@
 package com.henktech.maskup.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -50,6 +51,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         getSupportActionBar().hide();
+        final Context context = HomeActivity.this;
 
         final WeekdaysPicker widget = findViewById(R.id.weekdays);
         final Button saveDaysBtn = findViewById(R.id.saveButton);
@@ -62,7 +64,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onChange(View view, int clickedDayOfWeek, List<Integer> selectedDays) {
                 if (selectedDays.contains(clickedDayOfWeek)) {
-                    calListStart.put(clickedDayOfWeek, DayHourManager.getDayHour(HomeActivity.this, clickedDayOfWeek));
+                    calListStart.put(clickedDayOfWeek, DayHourManager.getDayHour(context, clickedDayOfWeek));
                 }
 
                 if (widget.noDaySelected()) {
