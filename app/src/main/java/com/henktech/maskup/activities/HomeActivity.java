@@ -23,7 +23,6 @@ import java.util.List;
 
 
 public class HomeActivity extends AppCompatActivity {
-    private static final String FILENAME = "days.txt";
     final HashMap<Integer, Calendar> calListStart = new HashMap<>();
     final Calendar sun, mon, tue, wed, thu, fri, sat;
     LinkedHashMap<Integer, Boolean> map = new LinkedHashMap<>();
