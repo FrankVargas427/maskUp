@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 Intent mainIntent = null;
                 if (SaveLoadManager.loadFile(context) == null) {
-                    mainIntent = new Intent(MainActivity.this, HomeActivity.class);
+                    mainIntent = new Intent(MainActivity.this, DayHourActivity.class);
                 } else {
                     mainIntent = new Intent(MainActivity.this, FlatActivity.class);
                 }

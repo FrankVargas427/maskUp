@@ -22,12 +22,13 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 
-public class HomeActivity extends AppCompatActivity {
+public class DayHourActivity extends AppCompatActivity {
     final HashMap<Integer, Calendar> calListStart = new HashMap<>();
     final Calendar sun, mon, tue, wed, thu, fri, sat;
     LinkedHashMap<Integer, Boolean> map = new LinkedHashMap<>();
 
-    public HomeActivity() {
+    public DayHourActivity() {
+        // make it so that if the days.txt is empty, make these. Else, make these but replace the ones that exist in the txt
         calListStart.put(1, sun = Calendar.getInstance());
         calListStart.put(2, mon = Calendar.getInstance());
         calListStart.put(3, tue = Calendar.getInstance());
@@ -48,12 +49,12 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_dayshours);
         getSupportActionBar().hide();
-        final Context context = HomeActivity.this;
+        final Context context = DayHourActivity.this;
 
         final WeekdaysPicker widget = findViewById(R.id.weekdays);
-        final Button saveDaysBtn = findViewById(R.id.saveButton);
+        final Button saveDaysBtn = findViewById(R.id.saveDaysButton);
 
         widget.setCustomDays(map);
         saveDaysBtn.setClickable(false);
@@ -93,9 +94,9 @@ public class HomeActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent mainIntent = new Intent(HomeActivity.this, FlatActivity.class);
-                HomeActivity.this.startActivity(mainIntent);
-                HomeActivity.this.finish();
+                Intent mainIntent = new Intent(DayHourActivity.this, PlacesActivity.class);
+                DayHourActivity.this.startActivity(mainIntent);
+                DayHourActivity.this.finish();
             }
         }, 100);
     }

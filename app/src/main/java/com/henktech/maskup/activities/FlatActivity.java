@@ -20,7 +20,8 @@ import java.util.Collections;
 import java.util.HashMap;
 
 public class FlatActivity extends AppCompatActivity {
-    private static final String FILENAME = "days.txt";
+    private static final String FILENAME_DAYS = "days.txt";
+    private static final String FILENAME_PLACES = "places.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,7 @@ public class FlatActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent mainIntent = new Intent(FlatActivity.this, HomeActivity.class);
+                Intent mainIntent = new Intent(FlatActivity.this, DayHourActivity.class);
                 FlatActivity.this.startActivity(mainIntent);
                 FlatActivity.this.finish();
             }
@@ -54,6 +55,7 @@ public class FlatActivity extends AppCompatActivity {
         for (Object intKey : employeeByKey) {
             Calendar entry = (Calendar) daysMap.get(intKey);
 
+            assert entry != null;
             @SuppressLint("DefaultLocale")
             String lineSet = DayHourManager.dayNumToString(
                     entry.get(Calendar.DAY_OF_WEEK)) +

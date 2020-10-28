@@ -1,4 +1,4 @@
-package com.henktech.maskup.publishers;
+package com.henktech.maskup.tools;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;

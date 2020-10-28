@@ -11,17 +11,18 @@
         android:roundIcon="@mipmap/maskup_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".activities.PlacesActivity"></activity>
         <activity
             android:name=".activities.MainActivity"
             android:label="Mask Up">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.HomeActivity"
+            android:name=".activities.DayHourActivity"
             android:label="Home" />
         <activity
             android:name=".activities.FlatActivity"
@@ -30,13 +31,13 @@
             android:name=".activities.FindMaskActivity"
             android:label="Find Mask" />
 
-        <receiver android:name=".publishers.NotificationPublisher">
+        <receiver android:name=".tools.NotificationPublisher">
             <intent-filter>
                 <action android:name="android.media.action.DISPLAY_NOTIFICATION" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </receiver>
-
     </application>
 
 </manifest>
