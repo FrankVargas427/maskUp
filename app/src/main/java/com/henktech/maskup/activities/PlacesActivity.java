@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -55,6 +56,9 @@ public class PlacesActivity extends AppCompatActivity implements PlacesDialog.Di
 
     public void savePlaces(View v) {
         SaveLoadManager.saveFile(housePlaces, this.getApplicationContext(), getString(R.string.placesSavefile));
+
+        Toast toast = Toast.makeText(getApplicationContext(), "Places saved!", Toast.LENGTH_SHORT);
+        toast.show();
 
         new Handler().postDelayed(new Runnable() {
             @Override

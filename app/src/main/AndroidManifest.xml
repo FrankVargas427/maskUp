@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".activities.EntryActivity"
             android:label="Mask Up">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,9 +30,10 @@
             android:label="Home" />
         <activity
             android:name=".activities.FindMaskActivity"
-            android:label="Find Mask" />
+            android:label="Find Mask"
+            android:parentActivityName=".activities.HomeActivity" />
 
-        <receiver android:name=".tools.NotificationPublisher">
+        <receiver android:name=".tools.NotificationReceiver">
             <intent-filter>
                 <action android:name="android.media.action.DISPLAY_NOTIFICATION" />
                 <category android:name="android.intent.category.DEFAULT" />

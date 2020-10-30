@@ -5,8 +5,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,8 +28,33 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_flat);
-        getSupportActionBar().hide();
+        setContentView(R.layout.activity_home);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.home_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int idItem = item.getItemId();
+        switch (idItem) {
+            case R.id.reviewHours:
+                reviewHours(item.getActionView());
+                break;
+            case R.id.editHours:
+                editHours(item.getActionView());
+                break;
+            case R.id.reviewPlaces:
+                reviewPlaces(item.getActionView());
+                break;
+            case R.id.editPlaces:
+                editPlaces(item.getActionView());
+                break;
+        }
+        return true;
     }
 
     public void editHours(View v) {
@@ -34,6 +62,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Intent mainIntent = new Intent(HomeActivity.this, DayHourActivity.class);
+                mainIntent.putExtra("prev", "1");
                 HomeActivity.this.startActivity(mainIntent);
                 HomeActivity.this.finish();
             }

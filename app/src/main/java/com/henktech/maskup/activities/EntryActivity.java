@@ -8,16 +8,18 @@ import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.henktech.maskup.R;
+import com.henktech.maskup.managers.NotificationController;
 import com.henktech.maskup.managers.SaveLoadManager;
 
-public class MainActivity extends AppCompatActivity {
+public class EntryActivity extends AppCompatActivity {
     private final int SPLASH_DISPLAY_LENGTH = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_entry);
         final Context context = this.getApplicationContext();
+        NotificationController.createNotificationChannel(this);
 
         getSupportActionBar().hide();
 
@@ -26,12 +28,13 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 Intent mainIntent = null;
                 if (SaveLoadManager.loadFile(context, getString(R.string.daysSavefile)) == null) {
-                    mainIntent = new Intent(MainActivity.this, DayHourActivity.class);
+                    mainIntent = new Intent(getBaseContext(), DayHourActivity.class);
                 } else {
-                    mainIntent = new Intent(MainActivity.this, HomeActivity.class);
+                    mainIntent = new Intent(getBaseContext(), HomeActivity.class);
                 }
-                MainActivity.this.startActivity(mainIntent);
-                MainActivity.this.finish();
+                mainIntent.putExtra("prev", "0");
+                EntryActivity.this.startActivity(mainIntent);
+                EntryActivity.this.finish();
             }
         }, SPLASH_DISPLAY_LENGTH);
 

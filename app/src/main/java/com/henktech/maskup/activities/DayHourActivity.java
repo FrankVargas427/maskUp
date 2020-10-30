@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,7 +14,7 @@ import com.dpro.widgets.OnWeekdaysChangeListener;
 import com.dpro.widgets.WeekdaysPicker;
 import com.henktech.maskup.R;
 import com.henktech.maskup.managers.DayHourManager;
-import com.henktech.maskup.managers.NotificationManager;
+import com.henktech.maskup.managers.NotificationController;
 import com.henktech.maskup.managers.SaveLoadManager;
 
 import java.util.Calendar;
@@ -26,6 +27,7 @@ public class DayHourActivity extends AppCompatActivity {
     final HashMap<Integer, Calendar> calListStart = new HashMap<>();
     final Calendar sun, mon, tue, wed, thu, fri, sat;
     LinkedHashMap<Integer, Boolean> map = new LinkedHashMap<>();
+    int prev = 0;
 
     public DayHourActivity() {
         // make it so that if the days.txt is empty, make these. Else, make these but replace the ones that exist in the txt
@@ -51,8 +53,12 @@ public class DayHourActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dayshours);
         getSupportActionBar().hide();
-        final Context context = DayHourActivity.this;
 
+        if (getIntent().getExtras() != null) {
+            prev = Integer.parseInt(getIntent().getStringExtra("prev"));
+        }
+
+        final Context context = DayHourActivity.this;
         final WeekdaysPicker widget = findViewById(R.id.weekdays);
         final Button saveDaysBtn = findViewById(R.id.saveDaysButton);
 
@@ -89,12 +95,20 @@ public class DayHourActivity extends AppCompatActivity {
 
         SaveLoadManager.saveFile(saveDays, this.getApplicationContext(), getString(R.string.daysSavefile));
 
-        NotificationManager.scheduleNotification(this, saveDays);
+        NotificationController.scheduleNotification(this, saveDays);
+
+        Toast toast = Toast.makeText(getApplicationContext(), "Days and hours saved!", Toast.LENGTH_SHORT);
+        toast.show();
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent mainIntent = new Intent(DayHourActivity.this, PlacesActivity.class);
+                Intent mainIntent = null;
+                if (prev == 0) {
+                    mainIntent = new Intent(DayHourActivity.this, PlacesActivity.class);
+                } else {
+                    mainIntent = new Intent(DayHourActivity.this, HomeActivity.class);
+                }
                 DayHourActivity.this.startActivity(mainIntent);
                 DayHourActivity.this.finish();
             }

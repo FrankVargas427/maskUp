@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/reviewHours"
+        android:title="Review Hours" />
+    <item
+        android:id="@+id/editHours"
+        android:title="Edit Hours" />
+    <item
+        android:id="@+id/reviewPlaces"
+        android:title="Review Places" />
+    <item
+        android:id="@+id/editPlaces"
+        android:title="Edit Places" />
+</menu>
