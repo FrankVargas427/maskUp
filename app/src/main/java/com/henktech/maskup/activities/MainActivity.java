@@ -25,10 +25,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Intent mainIntent = null;
-                if (SaveLoadManager.loadFile(context) == null) {
+                if (SaveLoadManager.loadFile(context, getString(R.string.daysSavefile)) == null) {
                     mainIntent = new Intent(MainActivity.this, DayHourActivity.class);
                 } else {
-                    mainIntent = new Intent(MainActivity.this, FlatActivity.class);
+                    mainIntent = new Intent(MainActivity.this, HomeActivity.class);
                 }
                 MainActivity.this.startActivity(mainIntent);
                 MainActivity.this.finish();

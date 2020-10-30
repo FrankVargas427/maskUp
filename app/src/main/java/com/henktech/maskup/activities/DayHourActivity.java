@@ -87,7 +87,7 @@ public class DayHourActivity extends AppCompatActivity {
             saveDays.put(selectedDaysInt.get(i), calListStart.get(selectedDaysInt.get(i)));
         }
 
-        SaveLoadManager.saveFile(saveDays, this.getApplicationContext());
+        SaveLoadManager.saveFile(saveDays, this.getApplicationContext(), getString(R.string.daysSavefile));
 
         NotificationManager.scheduleNotification(this, saveDays);
 

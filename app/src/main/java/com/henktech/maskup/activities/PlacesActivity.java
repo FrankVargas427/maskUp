@@ -5,12 +5,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.henktech.maskup.R;
+import com.henktech.maskup.managers.SaveLoadManager;
 import com.henktech.maskup.pojos.Place;
 import com.henktech.maskup.tools.PlacesAdapter;
 import com.henktech.maskup.tools.PlacesDialog;
@@ -23,7 +23,7 @@ public class PlacesActivity extends AppCompatActivity implements PlacesDialog.Di
 
     public PlacesActivity() {
         // make it so that if the places.txt is empty, make these. Else, make these but replace the ones that exist in the txt
-        housePlaces.add(new Place("Living Place", 0));
+        housePlaces.add(new Place("Living Room", 0));
         housePlaces.add(new Place("Bedroom", 0));
         housePlaces.add(new Place("Kitchen", 0));
         housePlaces.add(new Place("Dining Room", 0));
@@ -36,8 +36,8 @@ public class PlacesActivity extends AppCompatActivity implements PlacesDialog.Di
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_places);
         getSupportActionBar().hide();
-        listView = (ListView) findViewById(R.id.placesListView);
-        Button savePlacesBtn = findViewById(R.id.savePlacesButton);
+
+        listView = findViewById(R.id.placesListView);
 
         listView.setAdapter(new PlacesAdapter(this,
                 android.R.layout.simple_list_item_multiple_choice, housePlaces));
@@ -54,10 +54,12 @@ public class PlacesActivity extends AppCompatActivity implements PlacesDialog.Di
     }
 
     public void savePlaces(View v) {
+        SaveLoadManager.saveFile(housePlaces, this.getApplicationContext(), getString(R.string.placesSavefile));
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent mainIntent = new Intent(PlacesActivity.this, FlatActivity.class);
+                Intent mainIntent = new Intent(PlacesActivity.this, HomeActivity.class);
                 PlacesActivity.this.startActivity(mainIntent);
                 PlacesActivity.this.finish();
             }

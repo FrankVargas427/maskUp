@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
@@ -28,11 +29,11 @@ public class PlacesAdapter extends ArrayAdapter<Place> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_place, parent, false);
         }
         // Lookup view for data population
-        TextView tvName = (TextView) convertView.findViewById(R.id.tvName);
-        TextView tvProbability = (TextView) convertView.findViewById(R.id.tvProbability);
+        TextView tvName = convertView.findViewById(R.id.tvName);
+        RatingBar rbProbability = convertView.findViewById(R.id.rbProbability);
         // Populate the data into the template view using the data object
         tvName.setText(place.getName());
-        tvProbability.setText(String.valueOf(place.getProbability()));
+        rbProbability.setRating(place.getProbability());
         // Return the completed view to render on screen
         return convertView;
     }

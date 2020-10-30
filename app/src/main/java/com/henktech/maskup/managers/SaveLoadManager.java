@@ -10,13 +10,12 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class SaveLoadManager {
-    private static final String FILENAME = "days.txt";
 
-    public static void saveFile(Object objToSave, Context context) {
+    public static void saveFile(Object objToSave, Context context, String filename) {
         FileOutputStream fos = null;
         ObjectOutputStream oos = null;
         try {
-            fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE);
+            fos = context.openFileOutput(filename, Context.MODE_PRIVATE);
             oos = new ObjectOutputStream(fos);
             oos.writeObject(objToSave);
         } catch (FileNotFoundException e) {
@@ -41,15 +40,15 @@ public class SaveLoadManager {
 
     }
 
-    public static Object loadFile(Context context) {
+    public static Object loadFile(Context context, String filename) {
         Object loadedFile = null;
         FileInputStream fis = null;
         ObjectInputStream ois = null;
 
         try {
-            fis = context.openFileInput(FILENAME);
+            fis = context.openFileInput(filename);
             ois = new ObjectInputStream(fis);
-            loadedFile = (Object) ois.readObject();
+            loadedFile = ois.readObject();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

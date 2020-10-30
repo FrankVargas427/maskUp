@@ -1,6 +1,8 @@
 package com.henktech.maskup.pojos;
 
-public class Place {
+import java.io.Serializable;
+
+public class Place implements Serializable {
     String nameOfRoom;
     float probability;
     //Next iteration: picture
