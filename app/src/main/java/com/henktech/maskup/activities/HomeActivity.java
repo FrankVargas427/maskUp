@@ -14,8 +14,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.henktech.maskup.R;
-import com.henktech.maskup.managers.DayHourManager;
-import com.henktech.maskup.managers.SaveLoadManager;
+import com.henktech.maskup.controllers.DayHourController;
+import com.henktech.maskup.controllers.SaveLoadController;
 import com.henktech.maskup.pojos.Place;
 
 import java.util.ArrayList;
@@ -83,7 +83,7 @@ public class HomeActivity extends AppCompatActivity {
     public void reviewHours(View v) {
 
         HashMap<Integer, Calendar> daysMap = (HashMap<Integer, Calendar>)
-                SaveLoadManager.loadFile(this.getApplicationContext(), getString(R.string.daysSavefile));
+                SaveLoadController.loadFile(this.getApplicationContext(), getString(R.string.daysSavefile));
 
         StringBuilder days = new StringBuilder();
 
@@ -96,7 +96,7 @@ public class HomeActivity extends AppCompatActivity {
 
             assert entry != null;
             @SuppressLint("DefaultLocale")
-            String lineSet = DayHourManager.dayNumToString(
+            String lineSet = DayHourController.dayNumToString(
                     entry.get(Calendar.DAY_OF_WEEK)) +
                     " at " +
                     entry.get(Calendar.HOUR) +
@@ -121,7 +121,7 @@ public class HomeActivity extends AppCompatActivity {
     public void reviewPlaces(View v) {
 
         ArrayList<Place> housePlaces = (ArrayList<Place>)
-                SaveLoadManager.loadFile(this.getApplicationContext(), getString(R.string.placesSavefile));
+                SaveLoadController.loadFile(this.getApplicationContext(), getString(R.string.placesSavefile));
 
         StringBuilder places = new StringBuilder();
 
@@ -143,5 +143,15 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 });
         alertDialog.show();
+    }
+
+    public void findFacemask(View v) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent mainIntent = new Intent(HomeActivity.this, FindMaskActivity.class);
+                HomeActivity.this.startActivity(mainIntent);
+            }
+        }, 100);
     }
 }

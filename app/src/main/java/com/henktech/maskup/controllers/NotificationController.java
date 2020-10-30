@@ -1,4 +1,4 @@
-package com.henktech.maskup.managers;
+package com.henktech.maskup.controllers;
 
 import android.app.AlarmManager;
 import android.app.NotificationChannel;

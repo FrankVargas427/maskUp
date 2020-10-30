@@ -16,24 +16,40 @@ import com.henktech.maskup.pojos.Place;
 import java.util.ArrayList;
 
 public class PlacesAdapter extends ArrayAdapter<Place> {
-    public PlacesAdapter(Context context, @LayoutRes int resource, ArrayList<Place> places) {
+    int makeOrFind = 0;
+
+    public PlacesAdapter(Context context, @LayoutRes int resource, ArrayList<Place> places, int makeOrFind) {
         super(context, resource, places);
+        this.makeOrFind = makeOrFind;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
         Place place = getItem(position);
-        // Check if an existing view is being reused, otherwise inflate the view
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_place, parent, false);
+        if (makeOrFind == 0) {
+            // Check if an existing view is being reused, otherwise inflate the view
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_place, parent, false);
+            }
+            // Lookup view for data population
+            TextView tvName = convertView.findViewById(R.id.tvName);
+            RatingBar rbProbability = convertView.findViewById(R.id.rbFrequency);
+            // Populate the data into the template view using the data object
+            tvName.setText(place.getName());
+            rbProbability.setRating(place.getProbability());
+        } else {
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_prob, parent, false);
+            }
+
+            TextView tvRoomName = convertView.findViewById(R.id.tvRoomName);
+            TextView tvProbability = convertView.findViewById(R.id.tvProbability);
+            double probRound = Math.round(place.getProbability() * 100.00) / 100.00;
+
+            tvRoomName.setText(place.getName());
+            tvProbability.setText(probRound + "%");
         }
-        // Lookup view for data population
-        TextView tvName = convertView.findViewById(R.id.tvName);
-        RatingBar rbProbability = convertView.findViewById(R.id.rbProbability);
-        // Populate the data into the template view using the data object
-        tvName.setText(place.getName());
-        rbProbability.setRating(place.getProbability());
         // Return the completed view to render on screen
         return convertView;
     }

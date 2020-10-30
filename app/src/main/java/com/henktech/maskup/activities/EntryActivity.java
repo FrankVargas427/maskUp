@@ -8,8 +8,8 @@ import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.henktech.maskup.R;
-import com.henktech.maskup.managers.NotificationController;
-import com.henktech.maskup.managers.SaveLoadManager;
+import com.henktech.maskup.controllers.NotificationController;
+import com.henktech.maskup.controllers.SaveLoadController;
 
 public class EntryActivity extends AppCompatActivity {
     private final int SPLASH_DISPLAY_LENGTH = 3000;
@@ -27,7 +27,7 @@ public class EntryActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Intent mainIntent = null;
-                if (SaveLoadManager.loadFile(context, getString(R.string.daysSavefile)) == null) {
+                if (SaveLoadController.loadFile(context, getString(R.string.daysSavefile)) == null) {
                     mainIntent = new Intent(getBaseContext(), DayHourActivity.class);
                 } else {
                     mainIntent = new Intent(getBaseContext(), HomeActivity.class);

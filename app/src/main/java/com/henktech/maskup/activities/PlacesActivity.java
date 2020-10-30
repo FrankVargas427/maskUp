@@ -11,7 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.henktech.maskup.R;
-import com.henktech.maskup.managers.SaveLoadManager;
+import com.henktech.maskup.controllers.SaveLoadController;
 import com.henktech.maskup.pojos.Place;
 import com.henktech.maskup.tools.PlacesAdapter;
 import com.henktech.maskup.tools.PlacesDialog;
@@ -20,6 +20,7 @@ import java.util.ArrayList;
 
 public class PlacesActivity extends AppCompatActivity implements PlacesDialog.DialogListener {
     final ArrayList<Place> housePlaces = new ArrayList<>();
+    PlacesAdapter placeAdapter;
     ListView listView;
 
     public PlacesActivity() {
@@ -39,9 +40,9 @@ public class PlacesActivity extends AppCompatActivity implements PlacesDialog.Di
         getSupportActionBar().hide();
 
         listView = findViewById(R.id.placesListView);
-
-        listView.setAdapter(new PlacesAdapter(this,
-                android.R.layout.simple_list_item_multiple_choice, housePlaces));
+        placeAdapter = new PlacesAdapter(this,
+                android.R.layout.simple_list_item_multiple_choice, housePlaces, 0);
+        listView.setAdapter(placeAdapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -51,11 +52,10 @@ public class PlacesActivity extends AppCompatActivity implements PlacesDialog.Di
                 placesDialog.show(getSupportFragmentManager(), "Frequency");
             }
         });
-
     }
 
     public void savePlaces(View v) {
-        SaveLoadManager.saveFile(housePlaces, this.getApplicationContext(), getString(R.string.placesSavefile));
+        SaveLoadController.saveFile(housePlaces, this.getApplicationContext(), getString(R.string.placesSavefile));
 
         Toast toast = Toast.makeText(getApplicationContext(), "Places saved!", Toast.LENGTH_SHORT);
         toast.show();
@@ -73,8 +73,6 @@ public class PlacesActivity extends AppCompatActivity implements PlacesDialog.Di
     @Override
     public void applyChanges(Place place, int position) {
         housePlaces.set(position, place);
-
-        listView.setAdapter(new PlacesAdapter(this,
-                android.R.layout.simple_list_item_multiple_choice, housePlaces));
+        placeAdapter.notifyDataSetChanged();
     }
 }

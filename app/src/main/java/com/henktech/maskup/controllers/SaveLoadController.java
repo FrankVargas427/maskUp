@@ -1,4 +1,4 @@
-package com.henktech.maskup.managers;
+package com.henktech.maskup.controllers;
 
 import android.content.Context;
 
@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class SaveLoadManager {
+public class SaveLoadController {
 
     public static void saveFile(Object objToSave, Context context, String filename) {
         FileOutputStream fos = null;

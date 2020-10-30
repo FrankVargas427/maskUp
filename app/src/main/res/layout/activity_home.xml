@@ -6,15 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".activities.HomeActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="@string/ready_note"
-        android:textSize="24sp"
+    <Button
+        android:layout_width="325dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="250dp"
+        android:onClick="findFacemask"
+        android:text="@string/findMask"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.25" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,9 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.dpro.widgets.OnWeekdaysChangeListener;
 import com.dpro.widgets.WeekdaysPicker;
 import com.henktech.maskup.R;
-import com.henktech.maskup.managers.DayHourManager;
-import com.henktech.maskup.managers.NotificationController;
-import com.henktech.maskup.managers.SaveLoadManager;
+import com.henktech.maskup.controllers.DayHourController;
+import com.henktech.maskup.controllers.NotificationController;
+import com.henktech.maskup.controllers.SaveLoadController;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -70,7 +70,7 @@ public class DayHourActivity extends AppCompatActivity {
             @Override
             public void onChange(View view, int clickedDayOfWeek, List<Integer> selectedDays) {
                 if (selectedDays.contains(clickedDayOfWeek)) {
-                    calListStart.put(clickedDayOfWeek, DayHourManager.getDayHour(context, clickedDayOfWeek));
+                    calListStart.put(clickedDayOfWeek, DayHourController.getDayHour(context, clickedDayOfWeek));
                 }
 
                 if (widget.noDaySelected()) {
@@ -93,7 +93,7 @@ public class DayHourActivity extends AppCompatActivity {
             saveDays.put(selectedDaysInt.get(i), calListStart.get(selectedDaysInt.get(i)));
         }
 
-        SaveLoadManager.saveFile(saveDays, this.getApplicationContext(), getString(R.string.daysSavefile));
+        SaveLoadController.saveFile(saveDays, this.getApplicationContext(), getString(R.string.daysSavefile));
 
         NotificationController.scheduleNotification(this, saveDays);
 

@@ -5,6 +5,7 @@
     <string name="daystext">Elige los dias que sales.</string>
     <string name="hourtext">Indica la hora que sales.</string>
     <string name="placetext">Indica que tanto visitas estas habitaciones en tu hogar.</string>
+    <string name="foundplace">Indica en donde encontraste tu cubrebocas.</string>
     <string name="timehint">HH:MM</string>
     <string name="saveButton">Save</string>
     <string name="loadButton">Load</string>
@@ -15,6 +16,7 @@
     <string name="returnerPlaces">Editar Lugares</string>
     <string name="reviewerPlaces">Revisar Lugares</string>
     <string name="temporalfindmask">¡No olvides tu cubrebocas!</string>
+    <string name="findMask">¿Donde esta mi cubrebocas?</string>
 
     <string name="daysSavefile">days</string>
     <string name="placesSavefile">places</string>
