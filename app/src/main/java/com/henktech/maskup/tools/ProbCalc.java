@@ -11,6 +11,9 @@ public class ProbCalc {
 
         for (Place checkPlace : inPlaces) {
             maxVal = maxVal + checkPlace.getProbability();
+            if (checkPlace.getProbability() != 0.0) {
+                outPlaces.add(checkPlace);
+            }
         }
 
         for (Place checkPlace : outPlaces) {
