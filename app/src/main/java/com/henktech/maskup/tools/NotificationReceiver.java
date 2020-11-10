@@ -20,9 +20,7 @@ public class NotificationReceiver extends BroadcastReceiver {
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 100, repeatingIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
-
         repeatingIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "notifyMaskUp")
                 .setContentIntent(pendingIntent)

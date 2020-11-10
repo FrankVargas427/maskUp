@@ -7,6 +7,7 @@ import android.widget.TimePicker;
 import java.util.Calendar;
 
 public class DayHourController {
+
     public static Calendar getDayHour(Context context, int day) {
         final Calendar cal = Calendar.getInstance();
 

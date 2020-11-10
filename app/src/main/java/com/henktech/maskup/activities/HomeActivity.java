@@ -81,7 +81,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void reviewHours(View v) {
-
         HashMap<Integer, Calendar> daysMap = (HashMap<Integer, Calendar>)
                 SaveLoadController.loadFile(this.getApplicationContext(), getString(R.string.daysSavefile));
 
@@ -119,7 +118,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void reviewPlaces(View v) {
-
         ArrayList<Place> housePlaces = (ArrayList<Place>)
                 SaveLoadController.loadFile(this.getApplicationContext(), getString(R.string.placesSavefile));
 

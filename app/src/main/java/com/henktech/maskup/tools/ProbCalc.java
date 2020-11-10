@@ -5,6 +5,9 @@ import com.henktech.maskup.pojos.Place;
 import java.util.ArrayList;
 
 public class ProbCalc {
+
+    //test
+
     public static ArrayList<Place> calculatePlaces(ArrayList<Place> inPlaces) {
         ArrayList<Place> outPlaces = new ArrayList<>();
         float maxVal = 0;
