@@ -149,6 +149,7 @@ public class HomeActivity extends AppCompatActivity {
             public void run() {
                 Intent mainIntent = new Intent(HomeActivity.this, FindMaskActivity.class);
                 HomeActivity.this.startActivity(mainIntent);
+                HomeActivity.this.finish();
             }
         }, 100);
     }

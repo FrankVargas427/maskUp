@@ -22,8 +22,8 @@ import java.util.ArrayList;
 public class FindMaskActivity extends AppCompatActivity {
 
     ListView placesList;
-    ArrayList<Place> placesProbability1;
-    ArrayList<Place> placesProbability2;
+    ArrayList<Place> placesProbabilityNumbers;
+    ArrayList<Place> placesProbabilityNormal;
     Context thisContext;
 
     @Override
@@ -32,35 +32,36 @@ public class FindMaskActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_mask);
         placesList = findViewById(R.id.placesList);
-        placesProbability1 = (ArrayList<Place>)
+        placesProbabilityNumbers = (ArrayList<Place>)
                 SaveLoadController.loadFile(this.getApplicationContext(), getString(R.string.placesSavefile));
-        placesProbability2 = (ArrayList<Place>) placesProbability1.clone();
+        placesProbabilityNormal = (ArrayList<Place>)
+                SaveLoadController.loadFile(this.getApplicationContext(), getString(R.string.placesSavefile));
 
-        placesProbability2 = ProbCalc.calculatePlaces(placesProbability2);
+        placesProbabilityNormal = ProbCalc.calculatePlaces(placesProbabilityNormal);
 
         placesList.setAdapter(new PlacesAdapter(this,
-                android.R.layout.simple_list_item_multiple_choice, placesProbability2, 1));
+                android.R.layout.simple_list_item_multiple_choice, placesProbabilityNormal, 1));
         placesList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
 
         placesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Place foundPlace = placesProbability2.get(position);
-
-                for (Place checkPlace : placesProbability1) {
-                    if (checkPlace.equals(foundPlace)) {
-                        float oldProb = checkPlace.getProbability();
-                        checkPlace.setProbability(oldProb + 1);
-                    }
-                }
-
-                SaveLoadController.saveFile(placesProbability1, thisContext, getString(R.string.placesSavefile));
-
                 Context context = getApplicationContext();
                 CharSequence text = "Cubrebocas encontrado!";
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
+
+                Place foundPlace = placesProbabilityNormal.get(position);
+
+                for (Place checkPlace : placesProbabilityNumbers) {
+                    if (checkPlace.getName().equals(foundPlace.getName())) {
+                        float oldProb = checkPlace.getProbability();
+                        checkPlace.setProbability(oldProb + 1);
+                    }
+                }
+
+                SaveLoadController.saveFile(placesProbabilityNumbers, thisContext, getString(R.string.placesSavefile));
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
