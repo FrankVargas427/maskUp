@@ -22,31 +22,43 @@ import java.util.ArrayList;
 public class FindMaskActivity extends AppCompatActivity {
 
     ListView placesList;
+    ArrayList<Place> placesProbability1;
+    ArrayList<Place> placesProbability2;
+    Context thisContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        thisContext = this.getApplicationContext();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_mask);
         placesList = findViewById(R.id.placesList);
-        ArrayList<Place> placesProbability = (ArrayList<Place>)
+        placesProbability1 = (ArrayList<Place>)
                 SaveLoadController.loadFile(this.getApplicationContext(), getString(R.string.placesSavefile));
+        placesProbability2 = (ArrayList<Place>) placesProbability1.clone();
 
-        placesProbability = ProbCalc.calculatePlaces(placesProbability);
+        placesProbability2 = ProbCalc.calculatePlaces(placesProbability2);
 
         placesList.setAdapter(new PlacesAdapter(this,
-                android.R.layout.simple_list_item_multiple_choice, placesProbability, 1));
+                android.R.layout.simple_list_item_multiple_choice, placesProbability2, 1));
         placesList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
 
         placesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Metodo que saque el objeto seleccionado, le sume valor a las veces encontrado
-                //y lo guarde.
+                Place foundPlace = placesProbability2.get(position);
+
+                for (Place checkPlace : placesProbability1) {
+                    if (checkPlace.equals(foundPlace)) {
+                        float oldProb = checkPlace.getProbability();
+                        checkPlace.setProbability(oldProb + 1);
+                    }
+                }
+
+                SaveLoadController.saveFile(placesProbability1, thisContext, getString(R.string.placesSavefile));
 
                 Context context = getApplicationContext();
                 CharSequence text = "Cubrebocas encontrado!";
                 int duration = Toast.LENGTH_SHORT;
-
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
 

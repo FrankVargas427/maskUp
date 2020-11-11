@@ -1,6 +1,7 @@
 package com.henktech.maskup.tools;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,8 +50,20 @@ public class PlacesAdapter extends ArrayAdapter<Place> {
 
             tvRoomName.setText(place.getName());
             tvProbability.setText(probRound + "%");
+
+            switch (position) {
+                case 0:
+                    convertView.setBackgroundColor(Color.parseColor("#7FEE59"));
+                    break;
+                case 1:
+                    convertView.setBackgroundColor(Color.parseColor("#EECA59"));
+                    break;
+                default:
+                    convertView.setBackgroundColor(Color.parseColor("#EE5B59"));
+            }
         }
         // Return the completed view to render on screen
+
         return convertView;
     }
 }

@@ -5,7 +5,6 @@ import java.io.Serializable;
 public class Place implements Serializable {
     String nameOfRoom;
     float probability;
-    //Next iteration: picture
 
     public Place() {
         nameOfRoom = null;
