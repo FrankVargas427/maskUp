@@ -31,6 +31,7 @@ public class FindMaskActivity extends AppCompatActivity {
         thisContext = this.getApplicationContext();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_mask);
+
         placesList = findViewById(R.id.placesList);
         placesProbabilityNumbers = (ArrayList<Place>)
                 SaveLoadController.loadFile(this.getApplicationContext(), getString(R.string.placesSavefile));

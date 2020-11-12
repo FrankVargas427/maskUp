@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/reviewHours"
-        android:title="Review Hours" />
+        android:title="@string/reviewerDays" />
     <item
         android:id="@+id/editHours"
-        android:title="Edit Hours" />
+        android:title="@string/returnerDays" />
     <item
         android:id="@+id/reviewPlaces"
-        android:title="Review Places" />
+        android:title="@string/reviewerPlaces" />
     <item
         android:id="@+id/editPlaces"
-        android:title="Edit Places" />
+        android:title="@string/returnerPlaces" />
 </menu>
