@@ -53,8 +53,34 @@ public class HomeActivity extends AppCompatActivity {
             case R.id.editPlaces:
                 editPlaces(item.getActionView());
                 break;
+            case R.id.reviewStatistics:
+                viewStatistics(item.getActionView());
+                break;
         }
         return true;
+    }
+
+    public void viewStatistics(View v) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent mainIntent = new Intent(HomeActivity.this, HistoryActivity.class);
+                HomeActivity.this.startActivity(mainIntent);
+                HomeActivity.this.finish();
+            }
+        }, 100);
+
+    }
+
+    public void findFacemask(View v) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent mainIntent = new Intent(HomeActivity.this, FindMaskActivity.class);
+                HomeActivity.this.startActivity(mainIntent);
+                HomeActivity.this.finish();
+            }
+        }, 100);
     }
 
     public void editHours(View v) {
@@ -141,16 +167,5 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 });
         alertDialog.show();
-    }
-
-    public void findFacemask(View v) {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent mainIntent = new Intent(HomeActivity.this, FindMaskActivity.class);
-                HomeActivity.this.startActivity(mainIntent);
-                HomeActivity.this.finish();
-            }
-        }, 100);
     }
 }

@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/reviewHours"
-        android:title="@string/reviewerDays" />
+        android:id="@+id/hoursMenu"
+        android:title="Alarmas">
+        <menu>
+            <item
+                android:id="@+id/reviewHours"
+                android:title="@string/reviewerDays" />
+            <item
+                android:id="@+id/editHours"
+                android:title="@string/returnerDays" />
+        </menu>
+    </item>
     <item
-        android:id="@+id/editHours"
-        android:title="@string/returnerDays" />
+        android:id="@+id/placesMenu"
+        android:title="Lugares">
+        <menu>
+            <item
+                android:id="@+id/reviewPlaces"
+                android:title="@string/reviewerPlaces" />
+            <item
+                android:id="@+id/editPlaces"
+                android:title="@string/returnerPlaces" />
+        </menu>
+    </item>
     <item
-        android:id="@+id/reviewPlaces"
-        android:title="@string/reviewerPlaces" />
-    <item
-        android:id="@+id/editPlaces"
-        android:title="@string/returnerPlaces" />
+        android:id="@+id/reviewStatistics"
+        android:title="@string/statistics" />
 </menu>

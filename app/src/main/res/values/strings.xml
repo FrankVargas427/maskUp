@@ -11,13 +11,19 @@
     <string name="loadButton">Load</string>
     <string name="testNotif">Test Notif</string>
     <string name="ready_note">¡Listo! Se te notificara esos dias.</string>
-    <string name="returnerDays">Editar Horas</string>
-    <string name="reviewerDays">Revisar Horas</string>
-    <string name="returnerPlaces">Editar Lugares</string>
-    <string name="reviewerPlaces">Revisar Lugares</string>
     <string name="temporalfindmask">¡No olvides tu cubrebocas!</string>
     <string name="findMask">¿Donde esta mi cubrebocas?</string>
 
+    <string name="returnerDays">Editar Alarmas</string>
+    <string name="reviewerDays">Revisar Alarmas</string>
+    <string name="returnerPlaces">Editar Lugares</string>
+    <string name="reviewerPlaces">Revisar Lugares</string>
+
+    <string name="statistics">Estadisticas</string>
+    <string name="history">Historial</string>
+    <string name="timesFound">Veces Encontrado Por Habitacion</string>
+
     <string name="daysSavefile">days</string>
     <string name="placesSavefile">places</string>
+    <string name="findingsSavefile">findings</string>
 </resources>

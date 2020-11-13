@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.henktech.maskup.R;
 import com.henktech.maskup.controllers.NotificationController;
 import com.henktech.maskup.controllers.SaveLoadController;
+import com.henktech.maskup.pojos.Finding;
+
+import java.util.ArrayList;
 
 public class EntryActivity extends AppCompatActivity {
     private final int SPLASH_DISPLAY_LENGTH = 3000;
@@ -22,6 +25,11 @@ public class EntryActivity extends AppCompatActivity {
         NotificationController.createNotificationChannel(this);
 
         getSupportActionBar().hide();
+
+        if (SaveLoadController.loadFile(context, getString(R.string.findingsSavefile)) == null) {
+            ArrayList<Finding> emptyFindings = new ArrayList<>();
+            SaveLoadController.saveFile(emptyFindings, context, getString(R.string.findingsSavefile));
+        }
 
         new Handler().postDelayed(new Runnable() {
             @Override

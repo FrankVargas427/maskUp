@@ -13,11 +13,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.henktech.maskup.R;
 import com.henktech.maskup.controllers.SaveLoadController;
+import com.henktech.maskup.pojos.Finding;
 import com.henktech.maskup.pojos.Place;
 import com.henktech.maskup.tools.PlacesAdapter;
 import com.henktech.maskup.tools.ProbCalc;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class FindMaskActivity extends AppCompatActivity {
 
@@ -31,6 +33,7 @@ public class FindMaskActivity extends AppCompatActivity {
         thisContext = this.getApplicationContext();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_mask);
+        getSupportActionBar().hide();
 
         placesList = findViewById(R.id.placesList);
         placesProbabilityNumbers = (ArrayList<Place>)
@@ -62,6 +65,11 @@ public class FindMaskActivity extends AppCompatActivity {
                     }
                 }
 
+                ArrayList<Finding> findingsArray = (ArrayList<Finding>)
+                        SaveLoadController.loadFile(thisContext, getString(R.string.findingsSavefile));
+                findingsArray.add(new Finding(foundPlace.getName(), Calendar.getInstance()));
+
+                SaveLoadController.saveFile(findingsArray, thisContext, getString(R.string.findingsSavefile));
                 SaveLoadController.saveFile(placesProbabilityNumbers, thisContext, getString(R.string.placesSavefile));
 
                 new Handler().postDelayed(new Runnable() {
@@ -74,5 +82,19 @@ public class FindMaskActivity extends AppCompatActivity {
                 }, 100);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent mainIntent = new Intent(FindMaskActivity.this, HomeActivity.class);
+                FindMaskActivity.this.startActivity(mainIntent);
+                FindMaskActivity.this.finish();
+            }
+        }, 100);
     }
 }
