@@ -3,25 +3,20 @@ package com.henktech.maskup.pojos;
 import java.io.Serializable;
 
 public class Place implements Serializable {
-    String nameOfRoom;
+    String name;
     float probability;
 
-    public Place() {
-        nameOfRoom = null;
-        probability = 0;
-    }
-
-    public Place(String nameOfRoom, float probability) {
-        this.nameOfRoom = nameOfRoom;
+    public Place(String name, float probability) {
+        this.name = name;
         this.probability = probability;
     }
 
     public String getName() {
-        return nameOfRoom;
+        return name;
     }
 
-    public void setName(String nameOfRoom) {
-        this.nameOfRoom = nameOfRoom;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public float getProbability() {
