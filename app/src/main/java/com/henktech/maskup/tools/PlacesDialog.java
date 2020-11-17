@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.RatingBar;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ import com.henktech.maskup.pojos.Place;
 public class PlacesDialog extends AppCompatDialogFragment {
     Place place;
     int position;
+    private EditText placeName;
     private RatingBar ratingBar;
     private DialogListener listener;
 
@@ -30,25 +32,29 @@ public class PlacesDialog extends AppCompatDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.places_dialog, null);
+        placeName = view.findViewById(R.id.placeName);
+        ratingBar = view.findViewById(R.id.placeRatingBar);
 
-        builder.setView(view).setTitle("Frequency").setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        placeName.setText(place.getName());
+        placeName.setEnabled(true);
+        placeName.setActivated(true);
+
+        builder.setView(view).setTitle("Frequency")
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
-            }
-        }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+                place.setName(placeName.getText().toString());
                 place.setProbability(ratingBar.getRating());
                 listener.applyChanges(place, position);
             }
         });
-
-        ratingBar = view.findViewById(R.id.placeRatingBar);
 
         return builder.create();
     }

@@ -25,11 +25,11 @@ import java.util.List;
 
 public class DayHourActivity extends AppCompatActivity {
     final HashMap<Integer, Calendar> calListStart = new HashMap<>();
-    final Calendar sun, mon, tue, wed, thu, fri, sat;
+    Calendar sun, mon, tue, wed, thu, fri, sat;
     LinkedHashMap<Integer, Boolean> map = new LinkedHashMap<>();
     int prev = 0;
 
-    public DayHourActivity() {
+    public void initializeDayHour(Context context) {
         // make it so that if the days.txt is empty, make these. Else, make these but replace the ones that exist in the txt
         calListStart.put(1, sun = Calendar.getInstance());
         calListStart.put(2, mon = Calendar.getInstance());
@@ -46,6 +46,14 @@ public class DayHourActivity extends AppCompatActivity {
         map.put(Calendar.FRIDAY, false);
         map.put(Calendar.SATURDAY, false);
         map.put(Calendar.SUNDAY, false);
+
+        HashMap<Integer, Calendar> loadDayHours = (HashMap<Integer, Calendar>)
+                SaveLoadController.loadFile(context, getString(R.string.daysSavefile));
+        if (loadDayHours != null) {
+            for (Integer key : loadDayHours.keySet()) {
+                map.put(key, true);
+            }
+        }
     }
 
     @Override
@@ -53,6 +61,8 @@ public class DayHourActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dayshours);
         getSupportActionBar().hide();
+
+        initializeDayHour(this);
 
         if (getIntent().getExtras() != null) {
             prev = Integer.parseInt(getIntent().getStringExtra("prev"));
@@ -63,8 +73,10 @@ public class DayHourActivity extends AppCompatActivity {
         final Button saveDaysBtn = findViewById(R.id.saveDaysButton);
 
         widget.setCustomDays(map);
-        saveDaysBtn.setClickable(false);
-        saveDaysBtn.setAlpha((float) 0.25);
+        if (prev == 0) {
+            saveDaysBtn.setClickable(false);
+            saveDaysBtn.setAlpha((float) 0.25);
+        }
 
         widget.setOnWeekdaysChangeListener(new OnWeekdaysChangeListener() {
             @Override

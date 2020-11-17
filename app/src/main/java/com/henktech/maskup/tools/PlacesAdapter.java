@@ -62,7 +62,6 @@ public class PlacesAdapter extends ArrayAdapter<Place> {
                     convertView.setBackgroundColor(Color.parseColor("#EE5B59"));
             }
         }
-        // Return the completed view to render on screen
 
         return convertView;
     }

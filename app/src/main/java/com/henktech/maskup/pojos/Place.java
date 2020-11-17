@@ -6,6 +6,11 @@ public class Place implements Serializable {
     String name;
     float probability;
 
+    public Place() {
+        this.name = null;
+        this.probability = -1;
+    }
+
     public Place(String name, float probability) {
         this.name = name;
         this.probability = probability;

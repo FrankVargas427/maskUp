@@ -2,17 +2,20 @@
     <string name="app_name">Mask Up!</string>
     <string name="splashlogo">splashLogo</string>
     <string name="start_app">Start App</string>
-    <string name="daystext">Elige los dias que sales.</string>
-    <string name="hourtext">Indica la hora que sales.</string>
-    <string name="placetext">Indica que tanto visitas estas habitaciones en tu hogar.</string>
     <string name="foundplace">Indica en donde encontraste tu cubrebocas.</string>
     <string name="timehint">HH:MM</string>
-    <string name="saveButton">Save</string>
-    <string name="loadButton">Load</string>
     <string name="testNotif">Test Notif</string>
     <string name="ready_note">¡Listo! Se te notificara esos dias.</string>
     <string name="temporalfindmask">¡No olvides tu cubrebocas!</string>
     <string name="findMask">¿Donde esta mi cubrebocas?</string>
+
+    <string name="daystext">Elige los dias que sales.</string>
+    <string name="hourtext">Indica la hora que sales.</string>
+    <string name="placetext">Indica que tanto visitas estas habitaciones en tu hogar.</string>
+
+    <string name="saveButton">Guardar</string>
+    <string name="loadButton">Cargar</string>
+    <string name="newPlaceButton">Nuevo</string>
 
     <string name="returnerDays">Editar Alarmas</string>
     <string name="reviewerDays">Revisar Alarmas</string>

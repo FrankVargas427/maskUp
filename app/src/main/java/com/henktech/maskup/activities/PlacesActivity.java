@@ -1,5 +1,6 @@
 package com.henktech.maskup.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,21 +24,13 @@ public class PlacesActivity extends AppCompatActivity implements PlacesDialog.Di
     PlacesAdapter placeAdapter;
     ListView listView;
 
-    public PlacesActivity() {
-        // make it so that if the places.txt is empty, make these. Else, make these but replace the ones that exist in the txt
-        housePlaces.add(new Place("Living Room", 0));
-        housePlaces.add(new Place("Bedroom", 0));
-        housePlaces.add(new Place("Kitchen", 0));
-        housePlaces.add(new Place("Dining Room", 0));
-        housePlaces.add(new Place("Bathroom", 0));
-        housePlaces.add(new Place("Studio", 0));
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_places);
         getSupportActionBar().hide();
+
+        initializePlaces(this);
 
         listView = findViewById(R.id.placesListView);
         placeAdapter = new PlacesAdapter(this,
@@ -48,10 +41,33 @@ public class PlacesActivity extends AppCompatActivity implements PlacesDialog.Di
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                PlacesDialog placesDialog = new PlacesDialog(housePlaces.get(position), position);
+                PlacesDialog placesDialog =
+                        new PlacesDialog(housePlaces.get(position), position);
                 placesDialog.show(getSupportFragmentManager(), "Frequency");
             }
         });
+    }
+
+    public void initializePlaces(Context context) {
+        ArrayList<Place> loadHousePlaces = (ArrayList<Place>)
+                SaveLoadController.loadFile(context, getString(R.string.placesSavefile));
+        if (loadHousePlaces == null) {
+            housePlaces.add(new Place("Living Room", 0));
+            housePlaces.add(new Place("Bedroom", 0));
+            housePlaces.add(new Place("Kitchen", 0));
+            housePlaces.add(new Place("Dining Room", 0));
+            housePlaces.add(new Place("Bathroom", 0));
+            housePlaces.add(new Place("Studio", 0));
+        } else {
+            housePlaces.addAll(loadHousePlaces);
+        }
+    }
+
+    public void newPlace(View v) {
+        Place newPlace = new Place();
+        housePlaces.add(newPlace);
+        PlacesDialog placesDialog = new PlacesDialog(newPlace, housePlaces.indexOf(newPlace));
+        placesDialog.show(getSupportFragmentManager(), "Frequency");
     }
 
     public void savePlaces(View v) {
