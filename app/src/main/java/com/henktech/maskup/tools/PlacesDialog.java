@@ -20,13 +20,15 @@ import com.henktech.maskup.pojos.Place;
 public class PlacesDialog extends AppCompatDialogFragment {
     Place place;
     int position;
+    boolean findOrMake;
     private EditText placeName;
     private RatingBar ratingBar;
     private DialogListener listener;
 
-    public PlacesDialog(Place place, int position) {
+    public PlacesDialog(Place place, int position, boolean findOrMake) {
         this.place = place;
         this.position = position;
+        this.findOrMake = findOrMake;
     }
 
     @NonNull
@@ -35,12 +37,15 @@ public class PlacesDialog extends AppCompatDialogFragment {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.places_dialog, null);
-        placeName = view.findViewById(R.id.placeName);
-        ratingBar = view.findViewById(R.id.placeRatingBar);
 
+        placeName = view.findViewById(R.id.placeName);
         placeName.setText(place.getName());
         placeName.setEnabled(true);
         placeName.setActivated(true);
+        if (findOrMake == false) {
+            ratingBar = view.findViewById(R.id.placeRatingBar);
+        }
+
 
         builder.setView(view).setTitle("Frequency")
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -51,7 +56,9 @@ public class PlacesDialog extends AppCompatDialogFragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 place.setName(placeName.getText().toString());
-                place.setProbability(ratingBar.getRating());
+                if (findOrMake == false) {
+                    place.setProbability(ratingBar.getRating());
+                }
                 listener.applyChanges(place, position);
             }
         });

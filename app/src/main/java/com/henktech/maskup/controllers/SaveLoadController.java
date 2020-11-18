@@ -36,8 +36,6 @@ public class SaveLoadController {
                 }
             }
         }
-
-
     }
 
     public static Object loadFile(Context context, String filename) {

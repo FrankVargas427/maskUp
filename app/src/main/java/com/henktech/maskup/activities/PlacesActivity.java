@@ -42,7 +42,7 @@ public class PlacesActivity extends AppCompatActivity implements PlacesDialog.Di
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 PlacesDialog placesDialog =
-                        new PlacesDialog(housePlaces.get(position), position);
+                        new PlacesDialog(housePlaces.get(position), position, false);
                 placesDialog.show(getSupportFragmentManager(), "Frequency");
             }
         });
@@ -66,7 +66,7 @@ public class PlacesActivity extends AppCompatActivity implements PlacesDialog.Di
     public void newPlace(View v) {
         Place newPlace = new Place();
         housePlaces.add(newPlace);
-        PlacesDialog placesDialog = new PlacesDialog(newPlace, housePlaces.indexOf(newPlace));
+        PlacesDialog placesDialog = new PlacesDialog(newPlace, housePlaces.indexOf(newPlace), false);
         placesDialog.show(getSupportFragmentManager(), "Frequency");
     }
 

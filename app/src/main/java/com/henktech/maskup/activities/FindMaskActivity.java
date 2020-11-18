@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import com.henktech.maskup.controllers.SaveLoadController;
 import com.henktech.maskup.pojos.Finding;
 import com.henktech.maskup.pojos.Place;
 import com.henktech.maskup.tools.PlacesAdapter;
+import com.henktech.maskup.tools.PlacesDialog;
 import com.henktech.maskup.tools.ProbCalc;
 
 import java.util.ArrayList;
@@ -27,6 +29,7 @@ public class FindMaskActivity extends AppCompatActivity {
     ArrayList<Place> placesProbabilityNumbers;
     ArrayList<Place> placesProbabilityNormal;
     Context thisContext;
+    Button newPlaceButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,15 @@ public class FindMaskActivity extends AppCompatActivity {
         placesList.setAdapter(new PlacesAdapter(this,
                 android.R.layout.simple_list_item_multiple_choice, placesProbabilityNormal, 1));
         placesList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+
+        newPlaceButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Place newPlace = new Place();
+                placesProbabilityNormal.add(newPlace);
+                PlacesDialog placesDialog = new PlacesDialog(newPlace, placesProbabilityNormal.indexOf(newPlace), true);
+                placesDialog.show(getSupportFragmentManager(), "Frequency");
+            }
+        });
 
         placesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
