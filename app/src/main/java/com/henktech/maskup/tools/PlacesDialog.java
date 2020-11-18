@@ -20,15 +20,17 @@ import com.henktech.maskup.pojos.Place;
 public class PlacesDialog extends AppCompatDialogFragment {
     Place place;
     int position;
-    boolean findOrMake;
+    boolean madeOrFound;
+    boolean buttonOrText;
     private EditText placeName;
     private RatingBar ratingBar;
     private DialogListener listener;
 
-    public PlacesDialog(Place place, int position, boolean findOrMake) {
+    public PlacesDialog(Place place, int position, boolean madeOrFound, boolean buttonOrText) {
         this.place = place;
         this.position = position;
-        this.findOrMake = findOrMake;
+        this.madeOrFound = madeOrFound;
+        this.buttonOrText = buttonOrText;
     }
 
     @NonNull
@@ -42,10 +44,15 @@ public class PlacesDialog extends AppCompatDialogFragment {
         placeName.setText(place.getName());
         placeName.setEnabled(true);
         placeName.setActivated(true);
-        if (findOrMake == false) {
-            ratingBar = view.findViewById(R.id.placeRatingBar);
-        }
 
+        ratingBar = view.findViewById(R.id.placeRatingBar);
+        if (madeOrFound) {
+            ratingBar.setRating(place.getProbability());
+        } else {
+            ratingBar.setVisibility(View.GONE);
+            ratingBar.setEnabled(false);
+            ratingBar.setActivated(false);
+        }
 
         builder.setView(view).setTitle("Frequency")
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -56,10 +63,12 @@ public class PlacesDialog extends AppCompatDialogFragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 place.setName(placeName.getText().toString());
-                if (findOrMake == false) {
+                if (madeOrFound) {
                     place.setProbability(ratingBar.getRating());
+                } else {
+                    place.setProbability(1);
                 }
-                listener.applyChanges(place, position);
+                listener.applyChanges(place, position, buttonOrText);
             }
         });
 
@@ -78,6 +87,6 @@ public class PlacesDialog extends AppCompatDialogFragment {
     }
 
     public interface DialogListener {
-        void applyChanges(Place place, int position);
+        void applyChanges(Place place, int position, boolean buttonOrText);
     }
 }
