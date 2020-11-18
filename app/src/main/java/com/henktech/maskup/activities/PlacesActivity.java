@@ -43,7 +43,7 @@ public class PlacesActivity extends AppCompatActivity implements PlacesDialog.Di
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 PlacesDialog placesDialog =
                         new PlacesDialog(housePlaces.get(position), position, true, false);
-                placesDialog.show(getSupportFragmentManager(), "Frequency");
+                placesDialog.show(getSupportFragmentManager(), getString(R.string.newPlace));
             }
         });
     }
@@ -52,12 +52,12 @@ public class PlacesActivity extends AppCompatActivity implements PlacesDialog.Di
         ArrayList<Place> loadHousePlaces = (ArrayList<Place>)
                 SaveLoadController.loadFile(context, getString(R.string.placesSavefile));
         if (loadHousePlaces == null) {
-            housePlaces.add(new Place("Living Room", 0));
-            housePlaces.add(new Place("Bedroom", 0));
-            housePlaces.add(new Place("Kitchen", 0));
-            housePlaces.add(new Place("Dining Room", 0));
-            housePlaces.add(new Place("Bathroom", 0));
-            housePlaces.add(new Place("Studio", 0));
+            housePlaces.add(new Place("Sala de Estar", 0));
+            housePlaces.add(new Place("Habitacion", 0));
+            housePlaces.add(new Place("Cocina", 0));
+            housePlaces.add(new Place("Comedor", 0));
+            housePlaces.add(new Place("Baño", 0));
+            housePlaces.add(new Place("Estudio", 0));
         } else {
             housePlaces.addAll(loadHousePlaces);
         }
@@ -65,13 +65,13 @@ public class PlacesActivity extends AppCompatActivity implements PlacesDialog.Di
 
     public void newPlace(View v) {
         PlacesDialog placesDialog = new PlacesDialog(new Place(), housePlaces.size(), true, true);
-        placesDialog.show(getSupportFragmentManager(), "Frequency");
+        placesDialog.show(getSupportFragmentManager(), getString(R.string.newPlace));
     }
 
     public void savePlaces(View v) {
         SaveLoadController.saveFile(housePlaces, this.getApplicationContext(), getString(R.string.placesSavefile));
 
-        Toast toast = Toast.makeText(getApplicationContext(), "Places saved!", Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.placesSaved), Toast.LENGTH_SHORT);
         toast.show();
 
         new Handler().postDelayed(new Runnable() {
@@ -90,5 +90,20 @@ public class PlacesActivity extends AppCompatActivity implements PlacesDialog.Di
             housePlaces.add(place);
         }
         placeAdapter.notifyDataSetChanged();
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent mainIntent = new Intent(PlacesActivity.this, HomeActivity.class);
+                PlacesActivity.this.startActivity(mainIntent);
+                PlacesActivity.this.finish();
+            }
+        }, 100);
     }
 }

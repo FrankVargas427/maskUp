@@ -132,7 +132,7 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         AlertDialog alertDialog = new AlertDialog.Builder(HomeActivity.this).create();
-        alertDialog.setTitle("Alarmas");
+        alertDialog.setTitle(getString(R.string.alarm));
         alertDialog.setMessage(days.toString());
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {
@@ -158,7 +158,7 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         AlertDialog alertDialog = new AlertDialog.Builder(HomeActivity.this).create();
-        alertDialog.setTitle("Frecuencias");
+        alertDialog.setTitle(getString(R.string.newPlace));
         alertDialog.setMessage(places.toString());
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {

@@ -36,7 +36,7 @@ public class HistoryActivity extends AppCompatActivity {
         ArrayList<String> statistics = new ArrayList<>();
 
         if (findingsArray.isEmpty()) {
-            String emptyStuff = "No hay datos!";
+            String emptyStuff = getString(R.string.emptyData);
             statistics.add(emptyStuff);
         } else {
             HashMap<String, Integer> statisticsMap = calculateFindings(findingsArray);

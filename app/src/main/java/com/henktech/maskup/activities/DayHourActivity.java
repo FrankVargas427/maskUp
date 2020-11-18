@@ -30,7 +30,6 @@ public class DayHourActivity extends AppCompatActivity {
     int prev = 0;
 
     public void initializeDayHour(Context context) {
-        // make it so that if the days.txt is empty, make these. Else, make these but replace the ones that exist in the txt
         calListStart.put(1, sun = Calendar.getInstance());
         calListStart.put(2, mon = Calendar.getInstance());
         calListStart.put(3, tue = Calendar.getInstance());
@@ -109,7 +108,7 @@ public class DayHourActivity extends AppCompatActivity {
 
         NotificationController.scheduleNotification(this, saveDays);
 
-        Toast toast = Toast.makeText(getApplicationContext(), "Days and hours saved!", Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.daysSaved), Toast.LENGTH_SHORT);
         toast.show();
 
         new Handler().postDelayed(new Runnable() {
@@ -121,6 +120,21 @@ public class DayHourActivity extends AppCompatActivity {
                 } else {
                     mainIntent = new Intent(DayHourActivity.this, HomeActivity.class);
                 }
+                DayHourActivity.this.startActivity(mainIntent);
+                DayHourActivity.this.finish();
+            }
+        }, 100);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent mainIntent = new Intent(DayHourActivity.this, HomeActivity.class);
                 DayHourActivity.this.startActivity(mainIntent);
                 DayHourActivity.this.finish();
             }

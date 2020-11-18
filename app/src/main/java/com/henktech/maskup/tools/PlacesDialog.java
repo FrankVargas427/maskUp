@@ -54,7 +54,7 @@ public class PlacesDialog extends AppCompatDialogFragment {
             ratingBar.setActivated(false);
         }
 
-        builder.setView(view).setTitle("Frequency")
+        builder.setView(view).setTitle(getString(R.string.place))
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

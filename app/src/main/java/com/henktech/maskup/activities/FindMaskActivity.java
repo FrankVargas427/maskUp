@@ -52,7 +52,7 @@ public class FindMaskActivity extends AppCompatActivity implements PlacesDialog.
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Context context = getApplicationContext();
-                CharSequence text = "Cubrebocas encontrado!";
+                CharSequence text = getString(R.string.foundFacemask);
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
@@ -87,21 +87,7 @@ public class FindMaskActivity extends AppCompatActivity implements PlacesDialog.
 
     public void newPlace(View v) {
         PlacesDialog placesDialog = new PlacesDialog(new Place(), placesProbabilityNormal.size(), false, true);
-        placesDialog.show(getSupportFragmentManager(), "Frequency");
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent mainIntent = new Intent(FindMaskActivity.this, HomeActivity.class);
-                FindMaskActivity.this.startActivity(mainIntent);
-                FindMaskActivity.this.finish();
-            }
-        }, 100);
+        placesDialog.show(getSupportFragmentManager(), getString(R.string.newPlace));
     }
 
     @Override
@@ -114,6 +100,21 @@ public class FindMaskActivity extends AppCompatActivity implements PlacesDialog.
 
         SaveLoadController.saveFile(findingsArray, thisContext, getString(R.string.findingsSavefile));
         SaveLoadController.saveFile(placesProbabilityNumbers, thisContext, getString(R.string.placesSavefile));
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent mainIntent = new Intent(FindMaskActivity.this, HomeActivity.class);
+                FindMaskActivity.this.startActivity(mainIntent);
+                FindMaskActivity.this.finish();
+            }
+        }, 100);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
 
         new Handler().postDelayed(new Runnable() {
             @Override
