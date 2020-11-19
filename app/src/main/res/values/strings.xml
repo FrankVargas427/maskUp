@@ -14,6 +14,7 @@
     <string name="place">"Lugar"</string>
 
     <string name="emptyData">"¡No hay datos!"</string>
+    <string name="emptyName">El lugar necesita un nombre.</string>
 
     <string name="newPlace">Nuevo Lugar</string>
 

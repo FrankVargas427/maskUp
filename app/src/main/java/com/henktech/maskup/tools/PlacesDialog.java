@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RatingBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,7 +18,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import com.henktech.maskup.R;
 import com.henktech.maskup.pojos.Place;
 
-public class PlacesDialogue extends AppCompatDialogFragment {
+public class PlacesDialog extends AppCompatDialogFragment {
     Place place;
     int position;
     boolean madeOrFound;
@@ -26,7 +27,7 @@ public class PlacesDialogue extends AppCompatDialogFragment {
     private RatingBar ratingBar;
     private DialogListener listener;
 
-    public PlacesDialogue(Place place, int position, boolean madeOrFound, boolean buttonOrText) {
+    public PlacesDialog(Place place, int position, boolean madeOrFound, boolean buttonOrText) {
         this.place = place;
         this.position = position;
         this.madeOrFound = madeOrFound;
@@ -36,6 +37,7 @@ public class PlacesDialogue extends AppCompatDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        final Context context = getContext();
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.places_dialog, null);
@@ -62,18 +64,24 @@ public class PlacesDialogue extends AppCompatDialogFragment {
                 }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                place.setName(placeName.getText().toString());
-                if (madeOrFound) {
-                    place.setProbability(ratingBar.getRating());
+                if (!placeName.getText().toString().equals("")) {
+                    place.setName(placeName.getText().toString());
+                    if (madeOrFound) {
+                        place.setProbability(ratingBar.getRating());
+                    } else {
+                        place.setProbability(1);
+                    }
+                    listener.applyChanges(place, position, buttonOrText);
                 } else {
-                    place.setProbability(1);
+                    Toast toast = Toast.makeText(context, getString(R.string.emptyName), Toast.LENGTH_SHORT);
+                    toast.show();
                 }
-                listener.applyChanges(place, position, buttonOrText);
             }
         });
 
         return builder.create();
     }
+
 
     @Override
     public void onAttach(@NonNull Context context) {
