@@ -16,13 +16,13 @@ import com.henktech.maskup.controllers.SaveLoadController;
 import com.henktech.maskup.pojos.Finding;
 import com.henktech.maskup.pojos.Place;
 import com.henktech.maskup.tools.PlacesAdapter;
-import com.henktech.maskup.tools.PlacesDialog;
+import com.henktech.maskup.tools.PlacesDialogue;
 import com.henktech.maskup.tools.ProbCalc;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class FindMaskActivity extends AppCompatActivity implements PlacesDialog.DialogListener {
+public class FindMaskActivity extends AppCompatActivity implements PlacesDialogue.DialogListener {
 
     ListView placesList;
     ArrayList<Place> placesProbabilityNumbers;
@@ -86,8 +86,8 @@ public class FindMaskActivity extends AppCompatActivity implements PlacesDialog.
     }
 
     public void newPlace(View v) {
-        PlacesDialog placesDialog = new PlacesDialog(new Place(), placesProbabilityNormal.size(), false, true);
-        placesDialog.show(getSupportFragmentManager(), getString(R.string.newPlace));
+        PlacesDialogue placesDialogue = new PlacesDialogue(new Place(), placesProbabilityNormal.size(), false, true);
+        placesDialogue.show(getSupportFragmentManager(), getString(R.string.newPlace));
     }
 
     @Override

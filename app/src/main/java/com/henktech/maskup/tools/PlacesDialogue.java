@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import com.henktech.maskup.R;
 import com.henktech.maskup.pojos.Place;
 
-public class PlacesDialog extends AppCompatDialogFragment {
+public class PlacesDialogue extends AppCompatDialogFragment {
     Place place;
     int position;
     boolean madeOrFound;
@@ -26,7 +26,7 @@ public class PlacesDialog extends AppCompatDialogFragment {
     private RatingBar ratingBar;
     private DialogListener listener;
 
-    public PlacesDialog(Place place, int position, boolean madeOrFound, boolean buttonOrText) {
+    public PlacesDialogue(Place place, int position, boolean madeOrFound, boolean buttonOrText) {
         this.place = place;
         this.position = position;
         this.madeOrFound = madeOrFound;

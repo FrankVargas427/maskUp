@@ -15,11 +15,11 @@ import com.henktech.maskup.R;
 import com.henktech.maskup.controllers.SaveLoadController;
 import com.henktech.maskup.pojos.Place;
 import com.henktech.maskup.tools.PlacesAdapter;
-import com.henktech.maskup.tools.PlacesDialog;
+import com.henktech.maskup.tools.PlacesDialogue;
 
 import java.util.ArrayList;
 
-public class PlacesActivity extends AppCompatActivity implements PlacesDialog.DialogListener {
+public class PlacesActivity extends AppCompatActivity implements PlacesDialogue.DialogListener {
     final ArrayList<Place> housePlaces = new ArrayList<>();
     PlacesAdapter placeAdapter;
     ListView listView;
@@ -41,9 +41,9 @@ public class PlacesActivity extends AppCompatActivity implements PlacesDialog.Di
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                PlacesDialog placesDialog =
-                        new PlacesDialog(housePlaces.get(position), position, true, false);
-                placesDialog.show(getSupportFragmentManager(), getString(R.string.newPlace));
+                PlacesDialogue placesDialogue =
+                        new PlacesDialogue(housePlaces.get(position), position, true, false);
+                placesDialogue.show(getSupportFragmentManager(), getString(R.string.newPlace));
             }
         });
     }
@@ -64,8 +64,8 @@ public class PlacesActivity extends AppCompatActivity implements PlacesDialog.Di
     }
 
     public void newPlace(View v) {
-        PlacesDialog placesDialog = new PlacesDialog(new Place(), housePlaces.size(), true, true);
-        placesDialog.show(getSupportFragmentManager(), getString(R.string.newPlace));
+        PlacesDialogue placesDialogue = new PlacesDialogue(new Place(), housePlaces.size(), true, true);
+        placesDialogue.show(getSupportFragmentManager(), getString(R.string.newPlace));
     }
 
     public void savePlaces(View v) {
