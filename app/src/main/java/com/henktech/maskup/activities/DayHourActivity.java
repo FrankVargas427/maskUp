@@ -108,7 +108,8 @@ public class DayHourActivity extends AppCompatActivity {
 
         NotificationController.scheduleNotification(this, saveDays);
 
-        Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.daysSaved), Toast.LENGTH_SHORT);
+        Toast toast = Toast.makeText(getApplicationContext(),
+                (R.string.daysSaved), Toast.LENGTH_SHORT);
         toast.show();
 
         new Handler().postDelayed(new Runnable() {
