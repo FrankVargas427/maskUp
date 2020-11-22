@@ -31,6 +31,7 @@ public class NotificationController {
     }
 
     public static void scheduleNotification(Context context, HashMap<Integer, Calendar> saveDays) {
+        // Esto crea las alarmas para mandar las notificaciones en todos los dias y horas indicadas.
         for (Map.Entry<Integer, Calendar> entry : saveDays.entrySet()) {
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0,
                     new Intent(context, NotificationReceiver.class), PendingIntent.FLAG_UPDATE_CURRENT);

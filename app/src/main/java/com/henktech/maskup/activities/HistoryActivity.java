@@ -35,6 +35,10 @@ public class HistoryActivity extends AppCompatActivity {
 
         ArrayList<String> statistics = new ArrayList<>();
 
+        /*
+        En caso de que haya datos de historial, se manda a llamar un contador de apariciones,
+        se crea un string y se insertan los datos de cada lugar repetido.
+         */
         if (findingsArray.isEmpty()) {
             String emptyStuff = getString(R.string.emptyData);
             statistics.add(emptyStuff);

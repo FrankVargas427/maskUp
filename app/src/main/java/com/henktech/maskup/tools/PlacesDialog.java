@@ -42,10 +42,19 @@ public class PlacesDialog extends AppCompatDialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.places_dialog, null);
 
+        // Se consiguen los datos del lugar y se insertan en el EditText
+
         placeName = view.findViewById(R.id.placeName);
         placeName.setText(place.getName());
         placeName.setEnabled(true);
         placeName.setActivated(true);
+
+        /*
+        El boolean madeOrFound indica si el dialogo se ejecuto en el menu de Editar Lugares (made)
+        o en el menu de Encontrar cubrebocas (found).
+
+        Si se ejecuto en made, la barra de estrellas se activa. De lo contrario, se desactiva.
+         */
 
         ratingBar = view.findViewById(R.id.placeRatingBar);
         if (madeOrFound) {
@@ -64,6 +73,20 @@ public class PlacesDialog extends AppCompatDialogFragment {
                 }).setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
+                /*
+                 En el caso de que se presione el boton de OK y el nombre no este vacio,
+                 al lugar se le inserta el nombre en el EditText y dos cosas pueden pasar:
+                    -Si el dialogo se ejecuto en made, al lugar se le inserta la probabilidad
+                    especificada en la barra de estrellas.
+                    -Si el dialogo se ejecuto en found, al lugar se le inserta un 1 como su
+                    probabilidad.
+                 Despues de esto, se aplican los cambios.
+
+                 Si se presiona el boton OK y el nombre esta vacio, te avisa sobre este error
+                 y no hace nada mas.
+                 */
+
                 if (!placeName.getText().toString().equals("")) {
                     place.setName(placeName.getText().toString());
                     if (madeOrFound) {

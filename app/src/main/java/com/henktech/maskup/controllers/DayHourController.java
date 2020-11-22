@@ -11,6 +11,9 @@ public class DayHourController {
     public static Calendar getDayHour(Context context, int day) {
         final Calendar cal = Calendar.getInstance();
 
+        /*
+        Se crea un calendario de acuerdo al dia especificado.
+         */
         cal.set(Calendar.DAY_OF_WEEK, day);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
@@ -19,6 +22,10 @@ public class DayHourController {
                 new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        /*
+                        Dado que se selecciona una hora y se le da OK, es consigue la hora
+                        y el minuto y se insertan en el calendario.
+                         */
                         cal.set(Calendar.HOUR_OF_DAY, hourOfDay);
                         cal.set(Calendar.MINUTE, minute);
                     }
@@ -29,6 +36,8 @@ public class DayHourController {
     }
 
     public static String dayNumToString(int dayNum) {
+        // Esto regresa una version String del dia indicado.
+
         switch (dayNum) {
             case Calendar.SUNDAY:
                 return "Sunday";

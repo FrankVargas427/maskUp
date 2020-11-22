@@ -37,6 +37,9 @@ public class HomeActivity extends AppCompatActivity {
         return true;
     }
 
+    /*
+    Dado que se elige una opcion del menu de los tres puntos, se manda a la ventana indicada.
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int idItem = item.getItemId();
@@ -65,6 +68,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Intent mainIntent = new Intent(HomeActivity.this, HistoryActivity.class);
+                mainIntent.putExtra("prev", "1");
                 HomeActivity.this.startActivity(mainIntent);
                 HomeActivity.this.finish();
             }
@@ -77,6 +81,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Intent mainIntent = new Intent(HomeActivity.this, FindMaskActivity.class);
+                mainIntent.putExtra("prev", "1");
                 HomeActivity.this.startActivity(mainIntent);
                 HomeActivity.this.finish();
             }
@@ -100,12 +105,17 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Intent mainIntent = new Intent(HomeActivity.this, PlacesActivity.class);
+                mainIntent.putExtra("prev", "1");
                 HomeActivity.this.startActivity(mainIntent);
                 HomeActivity.this.finish();
             }
         }, 100);
     }
 
+    /*
+    En caso de que se eliga revisar las horas o los lugares, se cargan los datos, se crea un string
+    con la informacion de los datos, se crea una caja de alerta y se inserta el string.
+     */
     public void reviewHours(View v) {
         HashMap<Integer, Calendar> daysMap = (HashMap<Integer, Calendar>)
                 SaveLoadController.loadFile(this.getApplicationContext(), getString(R.string.daysSavefile));

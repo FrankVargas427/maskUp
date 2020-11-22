@@ -12,6 +12,10 @@ import com.henktech.maskup.activities.FindMaskActivity;
 
 public class NotificationReceiver extends BroadcastReceiver {
 
+    /*
+    Este es el recividor que, al ser llamado, lanza la notificacion al telefono para que si
+    el usuario le da click, lo manda a la ventana de Encontrar su Cubrebocas.
+     */
     @Override
     public void onReceive(Context context, Intent intent) {
         NotificationManager notificationManager =

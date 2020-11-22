@@ -22,10 +22,13 @@ public class EntryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entry);
         final Context context = this.getApplicationContext();
+
+        // Se crea el canal donde se van a mandar las notificaciones.
         NotificationController.createNotificationChannel(this);
 
         getSupportActionBar().hide();
 
+        // Si no hay un archivo llamado "findings", se crea y se guarda vacio.
         if (SaveLoadController.loadFile(context, getString(R.string.findingsSavefile)) == null) {
             ArrayList<Finding> emptyFindings = new ArrayList<>();
             SaveLoadController.saveFile(emptyFindings, context, getString(R.string.findingsSavefile));
@@ -34,12 +37,22 @@ public class EntryActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent mainIntent = null;
+                Intent mainIntent;
+
+                /*
+                Si  no hay un archivo donde esten los dias guardados, esto significa que es
+                la primera vez que se corre esta aplicacion. Por lo cual, el siguiente menu
+                debe de ser el de dias y horas,
+
+                De lo contrario, la siguiente ventana sera el menu principal.
+                 */
                 if (SaveLoadController.loadFile(context, getString(R.string.daysSavefile)) == null) {
                     mainIntent = new Intent(getBaseContext(), DayHourActivity.class);
                 } else {
                     mainIntent = new Intent(getBaseContext(), HomeActivity.class);
                 }
+
+                // Se establece que la ventana anterior fue la de entrada.
                 mainIntent.putExtra("prev", "0");
                 EntryActivity.this.startActivity(mainIntent);
                 EntryActivity.this.finish();

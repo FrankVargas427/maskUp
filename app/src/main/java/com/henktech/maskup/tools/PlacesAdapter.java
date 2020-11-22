@@ -17,26 +17,39 @@ import com.henktech.maskup.pojos.Place;
 import java.util.ArrayList;
 
 public class PlacesAdapter extends ArrayAdapter<Place> {
-    int makeOrFind = 0;
+    int madeOrFound = 0;
 
-    public PlacesAdapter(Context context, @LayoutRes int resource, ArrayList<Place> places, int makeOrFind) {
+    /*
+    Un adapter es una herramienta para crear una lista en base los pojos.
+    Este es el adaptador de los lugares.
+     */
+
+    public PlacesAdapter(Context context, @LayoutRes int resource, ArrayList<Place> places, int madeOrFound) {
         super(context, resource, places);
-        this.makeOrFind = makeOrFind;
+        this.madeOrFound = madeOrFound;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // Get the data item for this position
+        // De la lista se consigue el lugar actual.
         Place place = getItem(position);
-        if (makeOrFind == 0) {
-            // Check if an existing view is being reused, otherwise inflate the view
+
+        /*
+        El boolean madeOrFound indica si el adaptador se ejecuto en el menu de Editar Lugares (made)
+        o en el menu de Encontrar cubrebocas (found).
+
+        En ambos casos se insertan los datos del lugar indicado. Pero si el adaptador se ejecuto en
+        found, en lugar de un TextView y una barra de estrellas, es dos TextViews.
+         */
+        if (madeOrFound == 0) {
             if (convertView == null) {
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_place, parent, false);
             }
-            // Lookup view for data population
+            // Se buscan el TextView y la barra de estrellas.
             TextView tvName = convertView.findViewById(R.id.tvName);
             RatingBar rbProbability = convertView.findViewById(R.id.rbFrequency);
-            // Populate the data into the template view using the data object
+
+            // Se le insertan los datos del lugar.
             tvName.setText(place.getName());
             rbProbability.setRating(place.getProbability());
         } else {
@@ -46,11 +59,18 @@ public class PlacesAdapter extends ArrayAdapter<Place> {
 
             TextView tvRoomName = convertView.findViewById(R.id.tvRoomName);
             TextView tvProbability = convertView.findViewById(R.id.tvProbability);
+
+            // Se redondea la probabilidad para sacar un numero con 2 decimales.
             double probRound = Math.round(place.getProbability() * 100.00) / 100.00;
 
             tvRoomName.setText(place.getName());
             tvProbability.setText(probRound + "%");
 
+            /*
+            En caso de que el valor en la lista sea el primero, se le pone un fondo verde.
+            Si es el segundo, se le pone un fondo naranja.
+            Si no es ninguno, se le pone un fondo rojo.
+             */
             switch (position) {
                 case 0:
                     convertView.setBackgroundColor(Color.parseColor("#7FEE59"));
